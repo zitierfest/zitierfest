@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="440" viewBox="0 0 1280 440" role="img" aria-labelledby="t d">
+  <title id="t">Zitierfest</title>
+  <desc id="d">Gesetze und Urteile im amtlichen Wortlaut für Ihre KI</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16294a"/>
+      <stop offset="1" stop-color="#0e1b31"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c9a66b"/>
+      <stop offset="1" stop-color="#a17a38"/>
+    </linearGradient>
+    <pattern id="raster" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="440" rx="18" fill="url(#bg)"/>
+  <rect width="1280" height="440" rx="18" fill="url(#raster)"/>
+
+  <!-- großes Paragraphenzeichen im Hintergrund -->
+  <text x="1150" y="410" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="520" fill="#c9a66b" fill-opacity="0.06">§</text>
+
+  <!-- Logo -->
+  <rect x="80" y="72" width="76" height="76" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+  <text x="118" y="128" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="50" fill="#c9a66b">§</text>
+
+  <text x="80" y="250" font-family="Georgia, 'Times New Roman', serif" font-size="88" fill="#faf8f4" letter-spacing="-1">Zitierfest</text>
+  <rect x="82" y="276" width="120" height="4" fill="url(#gold)"/>
+  <text x="80" y="330" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="30" fill="#d9dee8">Gesetze und Urteile im amtlichen Wortlaut für Ihre KI.</text>
+
+  <!-- Kennzahlen -->
+  <text x="80" y="386" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" fill="#c9a66b" xml:space="preserve">30.000+ Gesetze<tspan fill="#5b6a85">   ·   </tspan>530.000+ Normen<tspan fill="#5b6a85">   ·   </tspan>150.000+ Entscheidungen<tspan fill="#5b6a85">   ·   </tspan>Bund, 16 Länder, EU</text>
+</svg>

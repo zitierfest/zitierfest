@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700" role="img" aria-labelledby="t d">
+  <title id="t">Beispiel: Antwort mit Zitierfest</title>
+  <desc id="d">Frage: Kann ein Vermieter wegen Eigenbedarfs für seinen Cousin kündigen? Die KI ruft § 573 BGB und BGH VIII ZR 276/23 über Zitierfest ab und antwortet mit Wortlaut und Fundstelle.</desc>
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c9a66b"/>
+      <stop offset="1" stop-color="#a17a38"/>
+    </linearGradient>
+    <filter id="schatten" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#132440" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="700" rx="18" fill="#faf8f4"/>
+
+  <g font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <!-- linke Spalte -->
+    <text x="64" y="108" font-size="15" letter-spacing="2" fill="#646c7c">OHNE ZITIERFEST</text>
+    <text x="64" y="148" font-family="Georgia, 'Times New Roman', serif" font-size="28" fill="#1c2433">Aus dem Gedächtnis</text>
+    <g font-size="18" fill="#5b6475">
+      <circle cx="72" cy="200" r="10" fill="none" stroke="#9b2c2c" stroke-width="2"/>
+      <path d="M67 195l10 10M77 195l-10 10" stroke="#9b2c2c" stroke-width="2"/>
+      <text x="94" y="206">Paragraphen, die es nicht gibt</text>
+      <circle cx="72" cy="246" r="10" fill="none" stroke="#9b2c2c" stroke-width="2"/>
+      <path d="M67 241l10 10M77 241l-10 10" stroke="#9b2c2c" stroke-width="2"/>
+      <text x="94" y="252">Veralteter Gesetzestext</text>
+      <circle cx="72" cy="292" r="10" fill="none" stroke="#9b2c2c" stroke-width="2"/>
+      <path d="M67 287l10 10M77 287l-10 10" stroke="#9b2c2c" stroke-width="2"/>
+      <text x="94" y="298">Falsche Aktenzeichen</text>
+      <circle cx="72" cy="338" r="10" fill="none" stroke="#9b2c2c" stroke-width="2"/>
+      <path d="M67 333l10 10M77 333l-10 10" stroke="#9b2c2c" stroke-width="2"/>
+      <text x="94" y="344">Randnummern geraten</text>
+    </g>
+
+    <text x="64" y="428" font-size="15" letter-spacing="2" fill="#86653a">MIT ZITIERFEST</text>
+    <g font-size="18" fill="#1c2433">
+      <circle cx="72" cy="470" r="10" fill="#2f6b4f"/>
+      <path d="M67 470l4 4 7-8" fill="none" stroke="#ffffff" stroke-width="2.2"/>
+      <text x="94" y="476">Amtlicher Wortlaut</text>
+      <circle cx="72" cy="516" r="10" fill="#2f6b4f"/>
+      <path d="M67 516l4 4 7-8" fill="none" stroke="#ffffff" stroke-width="2.2"/>
+      <text x="94" y="522">Aktueller Stand</text>
+      <circle cx="72" cy="562" r="10" fill="#2f6b4f"/>
+      <path d="M67 562l4 4 7-8" fill="none" stroke="#ffffff" stroke-width="2.2"/>
+      <text x="94" y="568">Zitierfähige Fundstelle</text>
+      <circle cx="72" cy="608" r="10" fill="#2f6b4f"/>
+      <path d="M67 608l4 4 7-8" fill="none" stroke="#ffffff" stroke-width="2.2"/>
+      <text x="94" y="614">Urteile im Originaltext</text>
+    </g>
+
+    <!-- Chat -->
+    <g filter="url(#schatten)">
+      <rect x="420" y="40" width="796" height="620" rx="14" fill="#ffffff" stroke="#e3ded4"/>
+    </g>
+
+    <rect x="596" y="72" width="588" height="60" rx="12" fill="#eef1f6"/>
+    <text x="620" y="108" font-size="18" fill="#1c2433">Kann ein Vermieter wegen Eigenbedarfs für seinen Cousin kündigen?</text>
+
+    <!-- Werkzeugaufrufe -->
+    <rect x="452" y="156" width="222" height="32" rx="16" fill="#f6f0e6" stroke="#c9a66b"/>
+    <text x="470" y="177" font-size="14" fill="#86653a">§  Zitierfest · normen · § 573 BGB</text>
+    <rect x="686" y="156" width="252" height="32" rx="16" fill="#f6f0e6" stroke="#c9a66b"/>
+    <text x="704" y="177" font-size="14" fill="#86653a">§  Zitierfest · urteile · VIII ZR 276/23</text>
+
+    <text x="452" y="232" font-size="18" fill="#1c2433"><tspan font-weight="700">Nein.</tspan> Ein Cousin ist kein Familienangehöriger im Sinne des</text>
+    <text x="452" y="258" font-size="18" fill="#1c2433">§ 573 Abs. 2 Nr. 2 BGB. Danach muss der Vermieter die Räume benötigen</text>
+
+    <rect x="452" y="278" width="4" height="34" fill="url(#gold)"/>
+    <text x="476" y="301" font-family="Georgia, 'Times New Roman', serif" font-size="18" fill="#1c2433">„als Wohnung für sich, seine Familienangehörigen oder Angehörige seines Haushalts“</text>
+    <text x="476" y="330" font-size="14" fill="#86653a">§ 573 Abs. 2 Nr. 2 BGB · Stand 23.07.2026</text>
+
+    <text x="452" y="378" font-size="18" fill="#1c2433">Wer dazu gehört, bestimmt der BGH anhand des Zeugnisverweigerungsrechts</text>
+    <text x="452" y="404" font-size="18" fill="#1c2433">(§ 383 ZPO, § 52 StPO):</text>
+
+    <rect x="452" y="424" width="4" height="124" fill="url(#gold)"/>
+    <g font-family="Georgia, 'Times New Roman', serif" font-size="19" fill="#1c2433">
+      <text x="476" y="450">„Ein entfernterer Verwandter, der – wie ein Cousin – hiernach</text>
+      <text x="476" y="478">nicht zur Zeugnisverweigerung berechtigt ist, gehört deshalb selbst</text>
+      <text x="476" y="506">im Falle einer engen persönlichen Verbundenheit nicht zu dem […]</text>
+      <text x="476" y="534">privilegierten Personenkreis […].“</text>
+    </g>
+    <text x="476" y="568" font-size="14" fill="#86653a">BGH, Urt. v. 10.07.2024 – VIII ZR 276/23, Leitsatz</text>
+
+    <line x1="452" y1="600" x2="1184" y2="600" stroke="#e3ded4"/>
+    <text x="452" y="632" font-size="15" fill="#5b6475">Nachgeschlagen mit Zitierfest:  <tspan fill="#1c2433" font-weight="600">§ 573 BGB</tspan>  (Stand 23.07.2026) · <tspan fill="#1c2433" font-weight="600">VIII ZR 276/23</tspan> · <tspan fill="#1c2433" font-weight="600">VIII ZR 159/09</tspan></text>
+  </g>
+</svg>
