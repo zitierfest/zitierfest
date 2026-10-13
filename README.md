@@ -48,13 +48,13 @@ Kostenloses Konto auf **[zitierfest.de](https://zitierfest.de)**, dann:
 <table>
 <tr><td width="200"><b>Claude</b><br><sub>Web, Desktop, Mobile</sub></td><td>
 
-**Einstellungen → Konnektoren → Benutzerdefinierten Konnektor hinzufügen**, als URL eintragen:
+**[Zitierfest im Claude-Verzeichnis](https://claude.ai/directory/zitierfest)** öffnen, auf **Verbinden**
+klicken, anmelden, fertig.
 
-```
-https://mcp.zitierfest.de/mcp
-```
+Im Chat über das Konnektoren-Menü (Symbol unten im Eingabefeld) „Zitierfest“ einschalten.
 
-Anmelden, Zugriff erlauben, fertig. Im Chat über das Konnektoren-Menü „Zitierfest“ einschalten.
+<sub>Ohne Verzeichnis: **Einstellungen → Konnektoren → Benutzerdefinierten Konnektor hinzufügen**,
+URL `https://mcp.zitierfest.de/mcp`.</sub>
 
 </td></tr>
 <tr><td><b>Claude Code</b></td><td>
