@@ -1,0 +1,407 @@
+{
+  "identifier": "zitierfest",
+  "name": "Zitierfest",
+  "version": "5.1.0",
+  "description": "Official wording of German law for AI assistants: statutes (federal, all 16 states, municipal, EU), 150,000+ court decisions with paragraph numbers, and legal fee calculators. Read-only, hosted in Germany.",
+  "author": "Zitierfest",
+  "authorUrl": "https://github.com/zitierfest",
+  "homepage": "https://zitierfest.de",
+  "cloudEndpoint": "https://mcp.zitierfest.de/mcp",
+  "icon": "https://zitierfest.de/icon.png",
+  "tags": [
+    "legal",
+    "german-law",
+    "statutes",
+    "case-law",
+    "legal-research",
+    "eu-law",
+    "legal-fees",
+    "germany"
+  ],
+  "localizations": [
+    {
+      "locale": "de-DE",
+      "name": "Zitierfest",
+      "description": "Gesetze und Urteile im amtlichen Wortlaut für Ihre KI: Bundesrecht, alle 16 Länder, Ortsrecht, EU-Recht, über 150.000 Entscheidungen mit Randnummer und Gebührenrechner. Nur lesend, Server in Deutschland.",
+      "tags": [
+        "recht",
+        "gesetze",
+        "rechtsprechung",
+        "juristen",
+        "gebuehren"
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "normen",
+      "description": "Amtlicher Wortlaut deutscher und EU-Normen mit Stand (§, Artikel, Anlage, Erwägungsgrund): eine, mehrere (auch aus verschiedenen Gesetzen) oder ein Bereich von/bis in einem Aufruf. Antwort: normen (je Norm zitat und Text als content oder, bei einem Absatz oder einer Norm ohne Absätze mit mehreren Sätzen, nummeriert als saetze), gesetze {Kürzel: stand = letzte Änderung laut Quelle, rechtsraum}; nicht_gefunden mit gruende und vorschlaege; nicht_geladen (über dem Umfangsdeckel).",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "law": {
+            "default": "",
+            "description": "Kürzel für Einträge ohne eigenes, z. B. 'BGB'; leer, wenn jeder Eintrag sein Gesetz nennt.",
+            "type": "string"
+          },
+          "paragraphs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "1–20 Normen: '823', '14a', 'Art. 3', 'Anlage1', 'Erwägungsgrund 47', '§ 536 Abs. 1' (nur Abs. 1), 'Anlage 1 Nr. 7.1' (Nummer einer Anlage). Ohne law trägt jeder Eintrag sein Kürzel: ['§ 823 BGB', '§ 263 StGB']."
+          },
+          "von": {
+            "type": "string",
+            "description": "Statt paragraphs: erste Norm eines Bereichs."
+          },
+          "bis": {
+            "type": "string",
+            "description": "Letzte Norm des Bereichs (einschließlich)."
+          },
+          "absatz": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "description": "Nur dieser Absatz (2, '1a') bei Normen ohne eigenes 'Abs.'."
+          },
+          "offset": {
+            "default": 0,
+            "description": "Eine Norm: bei truncated mit next_offset weiterlesen.",
+            "type": "integer"
+          },
+          "rechtsraum": {
+            "type": "string",
+            "description": "Nur dieser Rechtsraum: bund (Bund), eu (EU), int (Völkerrecht), tarif (Tarifrecht öffentlicher Dienst), by (Bayern, mit Kommunalrecht); leer = alle. Andere Länder fehlen."
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "suche",
+      "description": "Stichwortsuche im amtlichen Wortlaut aller Normen im Bestand, beste Treffer zuerst. Syntax: Leerzeichen = UND, OR, -Begriff, \"Phrase\"; Wortanfänge finden Komposita; Fachbegriffe treffen besser als ganze Fragen. Ohne Treffer: Tippfehlerkorrektur, dann ODER-Suche (hinweis). Antwort: results mit snippet (Treffer **fett**), zitat und absatz.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "default": "",
+            "description": "2–4 Fachbegriffe: 'Kündigung fristlos Mietvertrag'.",
+            "type": "string"
+          },
+          "queries": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "Mehrere Formulierungen, Treffer vereinigt, Trefferzahl je Formulierung in treffer_je_query: ['Kokain', 'Betäubungsmittel']."
+          },
+          "kategorie": {
+            "type": "string",
+            "description": "Rechtsgebiet (Synonyme egal): zivilrecht, verbraucherrecht, familienrecht, erbrecht, mietrecht, arbeitsrecht, handelsrecht, gesellschaftsrecht, insolvenzrecht, wettbewerbsrecht, ipr, oeffentlichesrecht, verfassungsrecht, verwaltungsrecht, polizeirecht, baurecht, umweltrecht, energierecht, verkehrsrecht, auslaenderrecht, beamtenrecht, gesundheitsrecht, gewerberecht, sozialrecht, steuerrecht, datenschutz, strafrecht, verfahrensrecht, gebuehrenrecht, anwaltsrecht, notar, justizverwaltung, kapitalmarkt; Herkunft: landesrecht, bayern, eu, kommunalrecht, muenchen, regensburg, beratzhausen, tarifrecht."
+          },
+          "laws": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "Statt kategorie feste Kürzel: ['BGB', 'HGB']."
+          },
+          "limit": {
+            "default": 5,
+            "description": "1–50.",
+            "type": "integer"
+          },
+          "rechtsraum": {
+            "type": "string",
+            "description": "Rechtsraum-Code (bund (Bund), eu, int, tarif, by (Bayern, mit Kommunalrecht)); leer = alle."
+          },
+          "offset": {
+            "default": 0,
+            "description": "Blättern: next_offset der Vorantwort.",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "gesetze_finden",
+      "description": "Gesetze und Kürzel nach Titelwort, Normgeber, Rechtsraum oder Quelle, tippfehlertolerant. Ohne Angabe: Bestand je Quelle. Antwort: laws nach Relevanz, matched, next_offset.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "filter": {
+            "type": "string",
+            "description": "Kürzel oder Titelwort, tippfehlertolerant: 'Bauordnung'."
+          },
+          "gebietskoerperschaft": {
+            "type": "string",
+            "description": "Normgeber: 'Bund', 'Bayern', 'EU', 'München', 'Regensburg', 'Beratzhausen', 'Tarifrecht', 'Bezirk'; mit filter kombinierbar."
+          },
+          "quelle": {
+            "type": "string",
+            "description": "Alle Gesetze einer Quelle: 'gesetze-im-internet', 'gesetze-bayern', 'eur-lex', 'brak', 'muenchen-stadtrecht', 'muenchen-stadtrecht-neu', 'regensburg-stadtrecht', 'beratzhausen-ortsrecht'."
+          },
+          "limit": {
+            "default": 30,
+            "description": "1–500.",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "description": "Blättern: next_offset der Vorantwort.",
+            "type": "integer"
+          },
+          "rechtsraum": {
+            "type": "string",
+            "description": "Rechtsraum-Code (bund (Bund), eu, int, tarif, by (Bayern, mit Kommunalrecht)); leer = alle."
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "gesetz",
+      "description": "Ein ganzes Gesetz ohne Normtexte: info (Titel, Stand, Normenzahl), Gliederung, Änderungen seit einem Datum oder Nummerierungslücken.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "law": {
+            "description": "Kürzel, Groß-/Kleinschreibung egal: 'BGB', 'BayBO'.",
+            "type": "string"
+          },
+          "ansicht": {
+            "default": "info",
+            "description": "'info' (Titel, Stand, Normenzahl), 'struktur' (Gliederung, word_count je Norm), 'aenderungen' (seit since_date), 'luecken' (fehlende oder weggefallene Nummern).",
+            "type": "string"
+          },
+          "since_date": {
+            "default": "",
+            "description": "aenderungen: ab Datum (ISO), Standard vor einem Monat.",
+            "type": "string"
+          },
+          "limit": {
+            "default": 100,
+            "description": "struktur/aenderungen: 1–500 je Seite.",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "description": "Blättern: next_offset der Vorantwort.",
+            "type": "integer"
+          },
+          "rechtsraum": {
+            "type": "string",
+            "description": "Rechtsraum-Code (bund (Bund), eu, int, tarif, by (Bayern, mit Kommunalrecht)); leer = alle."
+          }
+        },
+        "required": [
+          "law"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "name": "verweise",
+      "description": "Querverweise eines § oder Artikels: eingehend (wer zitiert § 823 BGB?) oder ausgehend (worauf verweist § 242 BGB?). Antwort: total_found, references (absatz der zitierenden Stelle, zitiert = Absatz/Nr. des Ziels, via_bereich = aus „§§ 568 bis 576“), ausdrückliche Nennungen zuerst; candidate_prefilter_truncated: sehr oft zitiert, Liste unvollständig.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "law": {
+            "description": "Kürzel, Groß-/Kleinschreibung egal: 'BGB', 'BayBO'.",
+            "type": "string"
+          },
+          "paragraph": {
+            "description": "'823', 'Art. 3' (in Artikel-Gesetzen genügt '3'); eingehend '573 Abs. 2 Nr. 2' = nur Verweise auf diesen Absatz.",
+            "type": "string"
+          },
+          "richtung": {
+            "default": "eingehend",
+            "description": "'eingehend' (wer zitiert die Norm) oder 'ausgehend' (was sie zitiert).",
+            "type": "string"
+          },
+          "same_law_only": {
+            "default": false,
+            "description": "Nur Verweise innerhalb desselben Gesetzes.",
+            "type": "boolean"
+          },
+          "limit": {
+            "default": 20,
+            "description": "1–500.",
+            "type": "integer"
+          },
+          "rechtsraum": {
+            "type": "string",
+            "description": "Nur Verweise von bzw. auf Normen dieses Rechtsraums, Code wie bei normen (bund (Bund), eu, int, tarif, by (Bayern, mit Kommunalrecht)); leer = alle."
+          }
+        },
+        "required": [
+          "law",
+          "paragraph"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "name": "urteile",
+      "description": "Gerichtsentscheidungen im amtlichen Text (geladene Gerichte nennt bestand): Suche (query), Entscheidungen zu einer Norm (norm), Abruf per Aktenzeichen (Kopf; Gründe mit teil='gruende' und rn oder rn_von/rn_bis). Jede Entscheidung mit Zitatzeile.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Volltextsuche, 2–4 Fachbegriffe."
+          },
+          "aktenzeichen": {
+            "type": "string",
+            "description": "Abruf: Aktenzeichen, ECLI oder id eines Treffers."
+          },
+          "norm": {
+            "type": "string",
+            "description": "Entscheidungen zur Norm ('§ 823 BGB'): Leitsatz, dann Normenkette, dann Gründe (fundstelle)."
+          },
+          "teil": {
+            "default": "kopf",
+            "description": "Abruf: 'kopf' oder 'gruende'.",
+            "type": "string"
+          },
+          "rn": {
+            "type": "integer",
+            "description": "Gründe: nur diese Randnummer."
+          },
+          "rn_von": {
+            "type": "integer",
+            "description": "Gründe: ab Randnummer."
+          },
+          "rn_bis": {
+            "type": "integer",
+            "description": "Gründe: bis Randnummer."
+          },
+          "gericht": {
+            "type": "string",
+            "description": "Filter: Gericht, z. B. 'BGH' (geladene Gerichte: umfang)."
+          },
+          "senat": {
+            "type": "string",
+            "description": "Filter: 'VIII', '2. Strafsenat'."
+          },
+          "von": {
+            "type": "string",
+            "description": "Filter: Datum ab (JJJJ[-MM-TT])."
+          },
+          "bis": {
+            "type": "string",
+            "description": "Filter: Datum bis (JJJJ[-MM-TT])."
+          },
+          "limit": {
+            "default": 5,
+            "description": "1–20.",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "description": "Blättern: next_offset der Vorantwort.",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "gebuehr_berechnen",
+      "description": "Gebühr aus der Wertgebührentabelle (Anlage 2) von RVG, GKG, FamGKG oder GNotKG; mit positionen eine RVG-Kostennote, mit anrechnung samt Anrechnung der Geschäftsgebühr (Vorbem. 3 Abs. 4 VV RVG). RVG mit auftragsdatum: Tabelle nach § 60 RVG. GNotKG: Tabelle B (Notar, Grundbuch, Register, Nachlass) und A (übrige). Antwort: gebuehr_10, gebuehr_berechnet bzw. gebuehr_tabelle_a/_b; Kostennote bis gesamtsumme; dazu fundstelle und tabelle_stand.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "gesetz": {
+            "description": "'RVG' (Anwalt), 'GKG' (Gericht), 'FamGKG' (Familie), 'GNotKG' (Notar, Grundbuch, freiwillige Gerichtsbarkeit).",
+            "type": "string"
+          },
+          "wert": {
+            "description": "Gegenstands-, Streit- oder Geschäftswert in Euro, z. B. 5000.",
+            "type": "number"
+          },
+          "satz": {
+            "default": 1.0,
+            "description": "Gebührensatz, z. B. 1.3 (VV 3100), 3.0 (KV 1210 GKG).",
+            "type": "number"
+          },
+          "positionen": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "description": "Nur RVG, Kostennote: [{'nummer': '3100', 'satz': 1.3}, {'nummer': '3104', 'satz': 1.2}]; Pauschale 7002 und USt 7008 kommen automatisch dazu."
+          },
+          "ust_prozent": {
+            "default": 19.0,
+            "description": "Kostennote: USt in %.",
+            "type": "number"
+          },
+          "auftragsdatum": {
+            "type": "string",
+            "description": "Nur RVG: Datum des unbedingten Auftrags (JJJJ-MM-TT). Davor geänderte Tabelle nach § 60 RVG (vor 01.06.2025: KostRÄG 2021, vor 01.01.2021: 2. KostRMoG). Ohne Angabe die geltende Tabelle."
+          },
+          "anrechnung": {
+            "additionalProperties": true,
+            "type": "object",
+            "description": "Nur RVG-Kostennote: Anrechnung der Geschäftsgebühr nach Vorbem. 3 Abs. 4 VV RVG (zur Hälfte, höchstens 0.75), z. B. {'satz': 1.3}; optional 'wert' (übergegangener Wert), 'auf' (VV-Nummer, sonst erste Verfahrensgebühr)."
+          }
+        },
+        "required": [
+          "gesetz",
+          "wert"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "name": "gebuehren_verzeichnis",
+      "description": "Tatbestand, Satz oder Betrag und Anmerkung einer Nummer im Verzeichnis (Anlage 1) von RVG, GKG, FamGKG, GNotKG oder JVEG. Antwort mit abschnitt; gleiche Tatbestände stehen in mehreren Abschnitten (FamGKG 1110 Ehesache / 1420 einstweilige Anordnung).",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "gesetz": {
+            "description": "'RVG', 'GKG', 'FamGKG', 'GNotKG', 'JVEG' (Sachverständige, Dolmetscher).",
+            "type": "string"
+          },
+          "nummer": {
+            "description": "'3100', 'KV 1210', '21100'; JVEG z. B. 'M 1'.",
+            "type": "string"
+          },
+          "bis": {
+            "type": "string",
+            "description": "Endnummer eines Bereichs, höchstens 20 Einträge."
+          },
+          "anlage": {
+            "default": 1,
+            "description": "Nur JVEG: 1 Stundensätze (§ 9, Nr. '1'–'13', 'M 1'–'M 3'), 2 besondere Leistungen (§ 10, Nr. '100'), 3 Verkehrsdaten-Auskünfte (§ 23, Nr. '300').",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "gesetz",
+          "nummer"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "name": "stand",
+      "description": "Aktualität des Bestands: letzte Aktualisierung, mit law die letzte Änderung dieses Gesetzes laut Quelle. Antwort: finished_at, tage_alt, ok, failed_optional (nicht aktualisierte Quellen), gesetz.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "law": {
+            "type": "string",
+            "description": "Optional: letzte Änderung dieses Gesetzes."
+          }
+        },
+        "type": "object"
+      }
+    }
+  ]
+}
